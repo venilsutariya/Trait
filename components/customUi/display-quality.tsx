@@ -30,7 +30,7 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Loader, MoreVertical } from "lucide-react";
+import { Loader, MoreVertical, Search } from "lucide-react";
 import { toast } from "sonner";
 import {
     Dialog,
@@ -38,6 +38,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { useRouter } from "next/navigation";
+import { Input } from "../ui/input";
 
 const DisplayQuality = ({
     email
@@ -74,8 +75,28 @@ const DisplayQuality = ({
         router.push(`/addquality/${id}`)
     }
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        if(value !== "") {
+            axios.post("/api/search-quality", { qualityName: value })
+            .then((res) => {
+                setTimeout(() => {
+                    setQuality(res.data);
+                }, 500);
+            })
+            .catch((err) => console.log(err));
+        } else {
+            fetchData();
+        }
+    }
+
     return (
         <>
+            <div className="px-3">
+                <form className="px-3 flex gap-x-2 bg-zinc-100 items-center rounded-md overflow-hidden">
+                    <Search className="" /><Input name="qualityName" onChange={handleChange} type="text" placeholder="Search by quality name" className="bg-zinc-100 w-full border-none" />
+                </form>
+            </div>
             <Table className="p-0">
                 <TableHeader>
                     <TableRow>
@@ -151,16 +172,18 @@ const DisplayQuality = ({
                                                         <TableCell>Yarn:</TableCell>
                                                         <TableCell>{quality.yarnType}</TableCell>
                                                     </TableRow>
-                                                    <TableRow>
-                                                        <TableCell>Yarn Type:</TableCell>
-                                                        <TableCell>{quality.whichYarn}</TableCell>
-                                                    </TableRow>
                                                 </Table>
                                                 <DrawerHeader className="p-2">
-                                                    <DrawerTitle className=" font-normal text-md">Yarn Detail</DrawerTitle>
+                                                    <DrawerTitle className=" font-normal text-md">Warp yarn Detail</DrawerTitle>
                                                 </DrawerHeader>
                                                 <ScrollArea className="h-[150px] text-start rounded-md border p-2">
-                                                    {quality.yarnDetail}
+                                                    {quality.warpYarnDetail}
+                                                </ScrollArea>
+                                                <DrawerHeader className="p-2">
+                                                    <DrawerTitle className=" font-normal text-md">Weft yarn Detail</DrawerTitle>
+                                                </DrawerHeader>
+                                                <ScrollArea className="h-[150px] text-start rounded-md border p-2">
+                                                    {quality.weftYarnDetail}
                                                 </ScrollArea>
                                                 <DrawerHeader className="p-2">
                                                     <DrawerTitle className=" font-normal text-md">Yarn Pattern</DrawerTitle>

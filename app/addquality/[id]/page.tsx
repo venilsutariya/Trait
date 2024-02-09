@@ -38,7 +38,8 @@ const AddQuality = ({ params }: {
         addProfit: "",
         sellingPrice: "",
         yarnType: "",
-        whichYarn: "",
+        warpYarnDetail: "",
+        weftYarnDetail: "",
         yarnDetail: "",
         yarnPattern: "",
         reed: "",
@@ -175,26 +176,28 @@ const AddQuality = ({ params }: {
                             </label>
                             <span className="selection"></span>
                         </div>
-                        <div className="mt-3 flex gap-x-3">
-                            <label className={`flex items-center gap-x-1 cursor-pointer p-2 rounded-md ${formData.whichYarn === "warp yarn" ? 'bg-indigo-100' : ''}`}>
-                                <input checked={formData.yarnType === "warp yarn"} type="radio" onChange={handleChange} id="value-1" name="whichYarn" value="warp yarn" className="hidden form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                <span className="text-gray-700">Warp Yarn</span>
-                            </label>
-                            <label className={`flex items-center gap-x-1 cursor-pointer p-2 rounded-md ${formData.whichYarn === "weft yarn" ? 'bg-indigo-100 ' : ''}`}>
-                                <input checked={formData.yarnType === "weft yarn"} type="radio" onChange={handleChange} id="value-2" name="whichYarn" value="weft yarn" className=" hidden form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                <span className="text-gray-700">Weft Yarn</span>
-                            </label>
-                        </div>
                         <div className="mt-3">
-                            <label htmlFor="">Yarn details</label>
+                            <label htmlFor="">Warp yarn details</label>
                             <Textarea
                                 className="mt-1 bg-zinc-100 border-none"
                                 type="text"
                                 placeholder={"add yarn details"}
-                                name={"yarnDetail"}
+                                name={"warpYarnDetail"}
                                 // @ts-ignore
                                 onChange={handleChange}
-                                value={formData.yarnDetail}
+                                value={formData.warpYarnDetail}
+                            />
+                        </div>
+                        <div className="mt-3">
+                            <label htmlFor="">Weft yarn details</label>
+                            <Textarea
+                                className="mt-1 bg-zinc-100 border-none"
+                                type="text"
+                                placeholder={"add yarn details"}
+                                name={"weftYarnDetail"}
+                                // @ts-ignore
+                                onChange={handleChange}
+                                value={formData.weftYarnDetail}
                             />
                         </div>
                         <div className="mt-3">

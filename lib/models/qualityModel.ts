@@ -12,12 +12,14 @@ const qualitySchema = new mongoose.Schema(
     addProfit: { type: Number },
     sellingPrice: { type: Number },
     yarnType: { type: String },
-    whichYarn: { type: String },
+    warpYarnDetail: { type: String },
+    weftYarnDetail: { type: String },
     yarnDetail: { type: String },
     yarnPattern: { type: String },
     reed: { type: String },
     reedPattern: { type: String },
     drafting: { type: String },
+    lessing: { type: String }
   },
   {
     timestamps: true,
