@@ -21,10 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <div className="h-[8vh]">
-            <Navbar />
-          </div>
-          <div className="h-[92vh] overflow-auto">
+          <div className="overflow-auto">
             {children}
           </div>
           <Toaster position="top-right"/>
