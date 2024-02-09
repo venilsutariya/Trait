@@ -77,18 +77,15 @@ const DisplayQuality = ({
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        console.log(value === "");
-        if (value === "") {
-            fetchData();
-        } else {
-            axios.post("/api/search-quality", { qualityName: value })
-                .then((res) => {
-                    setTimeout(() => {
-                        setQuality(res.data);
-                    }, 500);
-                })
-                .catch((err) => console.log(err));
-        }
+        axios.post("/api/search-quality", { qualityName: value })
+            .then((res) => {
+                setTimeout(() => {
+                    setQuality(res.data);
+                }, 500);
+            })
+            .catch((err) => {
+                fetchData();
+            })
     }
 
     return (
